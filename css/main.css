@@ -1,0 +1,288 @@
+/*total*/
+ul {
+    list-style: none;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+em {
+    font-style: normal;
+}
+/*clearfix*/
+.clearfix:after {
+    content: ".";
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+}
+.clearfix {
+    *zoom: 1;
+}
+/*headr*/
+.header {
+    height: 56px;
+    min-width: 600px;
+    border: 2px solid #CCC;
+    min-width: 200px;
+    background-color: #DDD;
+}
+.logo {
+    margin-left: 20px;
+    font-size: 2em;
+    color: #999;
+    line-height: 56px;
+}
+
+/*main*/
+.main {
+    width: 100%;
+    min-width: 600px;
+}
+.main-file {
+    float: left;
+    width: 240px;
+    border-right: 1px solid #CCC;
+    background-color: #F2F2F2;
+}
+.file-senior {
+    overflow: auto;
+}
+.file-senior li {
+    padding: 10px;
+}
+.senior-subord {
+    position: relative;
+    height: 100%;
+    padding-top: 10px;
+}
+.subord-file>li {
+    padding: 5px;
+    height: 12px;
+    overflow: hidden;
+}
+.subord-file:last-child {
+    padding-bottom: 0;
+}
+.file-add {
+    height: 40px;
+    border-top: 1px solid #CCC;
+    padding-left: 20px;
+    line-height: 40px;
+    background-color: #F2F2F2;
+}
+.senior-subord .icon-cross {
+    position: absolute;
+    right: 0;
+    margin-top: 2px;
+    font-size: 0.5em;
+    color: rgba(0,0,0,0);
+}
+.subord-file li:hover {
+    border-bottom: 1px solid #CCC;
+}
+.senior-subord li:hover .icon-cross {
+    color: rgba(0,0,0,0.5);
+}
+.senior-subord span.icon-cross:hover {
+    color: rgba(0,0,0,1);
+}
+.main-list {
+    float: left;
+    width: 320px;
+    border-right: 1px solid #CCC;
+}
+.list-status {
+    height: 40px;
+    border-bottom: 1px solid #CCC;
+    background-color: #F2F2F2;
+}
+.list-status a {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 1px solid #CCC;
+    font-size: 0.7em;
+    margin: 9px 5px;
+}
+.list-status a:first-child {
+    margin-left: 30px;
+}
+.list-time {
+    overflow: auto;
+}
+.list-time div {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    background-color: #FAFAEE;
+    border-bottom: 1px solid #F0F0F0;
+}
+.list-file>li {
+    padding: 5px;
+    color: #000;
+}
+.main-content {
+    position: absolute;
+    left: 562px;
+    right: 0;
+    min-width: 200px;
+}
+.content-title {
+    height: 50px;
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #CCC;
+}
+.title-name {
+    margin-left: 20px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    line-height: 50px;
+}
+.content-title .icon {
+    font-size: 1.2em;
+    line-height: 50px;
+}
+.content-title .icon-checkmark {
+    position: absolute;
+    right: 60px;
+}
+.content-title .icon-pencil {
+    position: absolute;
+    right: 20px;
+}
+.content-time {
+    height: 50px;
+    background-color: #FAFAEE;
+    border-bottom: 1px solid #CCC;
+    line-height: 50px;
+    padding-left: 20px;
+}
+.content-main {
+    overflow: auto;
+    padding: 20px 20px 0 20px;
+}
+
+/*footer*/
+.footer {
+    height: 44px;
+    border-top: 1px solid #CCC;
+    background-color: #DDD;
+    text-align: center;
+    line-height: 45px;
+    font-size: 0.9em;
+}
+
+/*弹出层*/
+.prompt {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    background-color: #F2F2F2;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #CCC;
+    margin-left: -200px;
+}
+.prompt h6 {
+    text-align: center;
+    font-size: 2em;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #CCC;
+}
+.prompt label {
+    margin-left: 60px;
+    font-size: 1.2em;
+}
+.prompt input {
+    height: 30px;
+    border-radius: 5px;
+}
+.prompt button {
+    width: 50px;
+    height: 30px;
+    margin: 20px 0 0 95px;
+}
+.confirm {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 200px;
+    height: 100px;
+    background-color: #F2F2F2;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #CCC;
+    margin-left: -200px;
+}
+.confirm h6 {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #CCC;
+}
+.confirm button {
+    width: 50px;
+    height: 30px;
+    margin-left: 30px;
+}
+.editor {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background-color: #F2F2F2;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #CCC;
+    margin-left: -200px;
+}
+.editor h6 {
+    text-align: center;
+    font-size: 2em;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #CCC;
+}
+.editor label {
+    margin-left: 60px;
+    font-size: 1.2em;
+}
+.editor input {
+    height: 30px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.editor textarea {
+    width: 170px;
+    height: 100px;
+    resize:none;
+    border-radius: 5px;
+}
+.editor button {
+    width: 50px;
+    height: 30px;
+    margin: 20px 0 0 95px;
+}
+
+
+/*use in js*/
+.theBlock {
+    display: block;
+}
+.theNone {
+    display: none;
+}
+.theColor {
+    font-weight: bold;
+    color :#238C00;
+}
+.otherColor {
+    color: #238C00;
+}

@@ -1,0 +1,54 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?czajeh');
+	src:url('../fonts/icomoon.eot?#iefixczajeh') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?czajeh') format('woff'),
+		url('../fonts/icomoon.ttf?czajeh') format('truetype'),
+		url('../fonts/icomoon.svg?czajeh#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil:before {
+	content: "\e905";
+	margin-right: 10px;
+}
+
+.icon-file-empty:before {
+	content: "\e924";
+	margin-right: 10px;
+}
+
+.icon-folder-open:before {
+	content: "\e930";
+	margin-right: 10px;
+}
+
+.icon-plus:before {
+	content: "\ea0a";
+	margin-right: 10px;
+}
+
+.icon-cross:before {
+	content: "\ea0f";
+	margin-right: 10px;
+}
+
+.icon-checkmark:before {
+	content: "\ea10";
+}
+
