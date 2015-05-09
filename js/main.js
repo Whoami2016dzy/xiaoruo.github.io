@@ -55,6 +55,7 @@ var concise = {
                 that.getHeight();
             };
             this.popup();
+            this.TabSwitch();
         },
         popup: function() {
             this.theFile();
@@ -70,6 +71,8 @@ var concise = {
             concise.$("#file-senior").style.height = (Y - this.HAF - theAddHeight) + 'px';
             var theStatusHeight = concise.$('.list-status')[0].offsetHeight;
             concise.$("#list-time").style.height = (Y - this.HAF - theAddHeight - theStatusHeight) + 'px';
+            concise.$("#list-time-finish").style.height = (Y - this.HAF - theAddHeight - theStatusHeight) + 'px';
+            concise.$("#list-time-unfinish").style.height = (Y - this.HAF - theAddHeight - theStatusHeight) + 'px';
             var theTitleHeight = concise.$('.content-title')[0].offsetHeight;
             var theTimeHeight = concise.$('.content-time')[0].offsetHeight;
             concise.$("#content-main").style.height = (Y - this.HAF - theTitleHeight - theTimeHeight) + 'px';
@@ -77,25 +80,30 @@ var concise = {
         theFile: function() {
             var theUl = concise.$("#file-senior");
             var that = this;
+            if (concise.$("#defaults").children.length !== 0) {
+                concise.addClass(concise.$("#defaults").children[0], "otherColor");
+            }
             EventUtil.addHandler(theUl, "click", function(eve) {
                 var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
-                if(theEve.tagName.toLowerCase() === 'span') {
+                if (theEve.tagName.toLowerCase() === 'span') {
                     var folder = concise.$(".icon-folder-open");
-                    for(var i = 0, len = folder.length; i < len; i++) {
-                        if(folder[i] === EventUtil.getTarget(EventUtil.getEvent(eve))) {
+                    for (var i = 0, len = folder.length; i < len; i++) {
+                        if (folder[i] === EventUtil.getTarget(EventUtil.getEvent(eve))) {
                             concise.addClass(folder[i], "theColor");
                         } else {
                             concise.removeClass(folder[i], "theColor");
                         }
                     }
                     that.theDisplay(eve);
-                } else if(concise.hasClass(theEve.parentNode, "icon-file-empty")) {
+                } else if (concise.hasClass(theEve.parentNode, "icon-file-empty")) {
                     var theTask = concise.$(".icon-file-empty");
-                    for(var j = 0, len = theTask.length; j < len; j++) {
-                        if(theTask[j] === theEve.parentNode) {
+                    for (var j = 0, len = theTask.length; j < len; j++) {
+                        if (theTask[j] === theEve.parentNode) {
                             concise.addClass(theTask[j], "otherColor");
+                            concise.addClass(theTask[j].parentNode.parentNode.children[0], "theColor");
                         } else {
                             concise.removeClass(theTask[j], "otherColor");
+                            concise.removeClass(theTask[j].parentNode.parentNode.children[0], "theColor");
                         }
                     }
                 }
@@ -105,7 +113,7 @@ var concise = {
             var theUl = concise.$("#list-time");
             var that = this;
             EventUtil.addHandler(theUl, "click", function(eve) {
-                if(EventUtil.getTarget(EventUtil.getEvent(eve)).tagName.toLowerCase() === 'div') {
+                if (EventUtil.getTarget(EventUtil.getEvent(eve)).tagName.toLowerCase() === 'div') {
                     that.theDisplay(eve);
                 }
             });
@@ -139,7 +147,15 @@ var concise = {
                 that.showAdd("task");
             });
             EventUtil.addHandler(concise.$("#change"), "click", function() {
-                that.showAdd("change");
+                if (concise.$("#show-time").innerHTML !== "") {
+                    that.showAdd("change");
+                    concise.$("#title").value = concise.$("#title-name").innerHTML;
+                    concise.$("#date").value = concise.$("#show-time").innerHTML;
+                    concise.$("#content").value = concise.$("#content-main").innerHTML;
+                    concise.$("#title").disabled="true";
+                } else {
+                    alert("请选中任务后再执行此操作！");
+                }
             });
             EventUtil.addHandler(concise.$("#cancelA"), "click", function() {
                 concise.removeClass(concise.$("#editor"), "theBlock");
@@ -149,16 +165,15 @@ var concise = {
         showAdd: function(id) {
             concise.removeClass(concise.$("#editor"), "theNone");
             concise.addClass(concise.$("#editor"), "theBlock");
-            concise.$("#editor").name = id;
+            concise.$("#submitA").name = id;
         },
         theDelete: function() {
+            var that = this;
             EventUtil.addHandler(concise.$("#file-senior"), "click", function(eve) {
                 theSpan = EventUtil.getTarget(EventUtil.getEvent(eve));
-                if(theSpan.tagName.toLowerCase() === 'span' && concise.hasClass(theSpan, "icon-cross")) {
+                if (theSpan.tagName.toLowerCase() === 'span' && concise.hasClass(theSpan, "icon-cross")) {
                     concise.addClass(theSpan.parentNode, "theColor");
-                    concise.removeClass(concise.$("#confirm"), "theNone");
-                    concise.addClass(concise.$("#confirm"), "theBlock");
-                    concise.$("#confirm").name = "delete";
+                    that.showChange("delete");
                 }
             });
             EventUtil.addHandler(concise.$("#cancelD"), "click", function() {
@@ -167,14 +182,49 @@ var concise = {
             });
         },
         theOver: function() {
+            var that = this;
             EventUtil.addHandler(concise.$("#over"), "click", function() {
-                concise.removeClass(concise.$("#confirm"), "theNone");
-                concise.addClass(concise.$("#confirm"), "theBlock");
-                concise.$("#confirm").name = "theOver";
+                if (concise.$("#show-time").innerHTML !== "") {
+                    that.showChange("change");
+                } else {
+                    alert("请选中任务后再执行此操作！");
+                }
             });
             EventUtil.addHandler(concise.$("#cancelD"), "click", function() {
                 concise.removeClass(concise.$("#confirm"), "theBlock");
                 concise.addClass(concise.$("#confirm"), "theNone");
+            });
+        },
+        showChange: function(id) {
+            concise.removeClass(concise.$("#confirm"), "theNone");
+            concise.addClass(concise.$("#confirm"), "theBlock");
+            concise.$("#submitD").name = id;
+        },
+        TabSwitch: function() {
+            var theClick = concise.$("#list-status").children;
+            EventUtil.addHandler(theClick[0], "click", function(eve) {
+                concise.addClass(theClick[0], "selected");
+                concise.removeClass(theClick[1], "selected");
+                concise.removeClass(theClick[2], "selected");
+                concise.addClass(concise.$("#list-time"), "theBlock");
+                concise.removeClass(concise.$("#list-time-finish"), "theBlock");
+                concise.removeClass(concise.$("#list-time-unfinish"), "theBlock");
+            });
+            EventUtil.addHandler(theClick[1], "click", function(eve) {
+                concise.addClass(theClick[1], "selected");
+                concise.removeClass(theClick[0], "selected");
+                concise.removeClass(theClick[2], "selected");
+                concise.addClass(concise.$("#list-time-finish"), "theBlock");
+                concise.removeClass(concise.$("#list-time"), "theBlock");
+                concise.removeClass(concise.$("#list-time-unfinish"), "theBlock");
+            });
+            EventUtil.addHandler(theClick[2], "click", function(eve) {
+                concise.addClass(theClick[2], "selected");
+                concise.removeClass(theClick[0], "selected");
+                concise.removeClass(theClick[1], "selected");
+                concise.addClass(concise.$("#list-time-unfinish"), "theBlock");
+                concise.removeClass(concise.$("#list-time-finish"), "theBlock");
+                concise.removeClass(concise.$("#list-time"), "theBlock");
             });
         }
     };

@@ -47,70 +47,33 @@
             <div class="file-add icon icon-plus" id="addCategory">新增分类</div>
         </div>
         <div class="main-list">
-            <div class="list-status">
-                <a href="javascript:void(0);">所有</a>
+            <div class="list-status" id="list-status">
+                <a href="javascript:void(0);" class="selected">所有</a>
                 <a href="javascript:void(0);">未完成</a>
                 <a href="javascript:void(0);">已完成</a>
             </div>
-            <ul class="list-time" id="list-time">
-                <li>
-                    <div>2015-5-1</div>
-                    <ul class="list-file theBlock">
-                        <li>
-                            <a href="#">to-do 1</a>
-                        </li>
-                        <li>
-                            <a href="#">to-do 2</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <div>2015-5-3</div>
-                    <ul class="list-file theNone">
-                        <li>
-                            <a href="#">to-do 3</a>
-                        </li>
-                        <li>
-                            <a href="#">to-do 4</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <div>2015-5-5</div>
-                    <ul class="list-file theNone">
-                        <li>
-                            <a href="#">to-do 5</a>
-                        </li>
-                        <li>
-                            <a href="#">to-do 6</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <div>2015-5-7</div>
-                    <ul class="list-file theNone">
-                        <li>
-                            <a href="#">to-do 7</a>
-                        </li>
-                        <li>
-                            <a href="#">to-do 8</a>
-                        </li>
-                    </ul>
-                </li>
+            <ul class="list-time theBlock" id="list-time">
+                <!-- 动态插入事件 所有-->
+            </ul>
+            <ul class="list-time" id="list-time-unfinish">
+                <!-- 动态插入事件 未完成-->
+            </ul>
+            <ul class="list-time" id="list-time-finish">
+                <!-- 动态插入事件 已完成-->
             </ul>
             <div class="file-add icon icon-plus" id="addTask">新增任务</div>
         </div>
         <div class="main-content">
             <div class="content-title">
-                <span class="title-name">to-do 2</span>
+                <span class="title-name" id="title-name">任务名称</span>
                 <span class="icon icon-checkmark" id="over"></span>
                 <span class="icon icon-pencil" id="change"></span>
             </div>
             <div class="content-time">
                 任务日期：
-                <span>2015-5-5</span>
+                <span id="show-time"></span>
             </div>
-            <div class="content-main" id="content-main">写一些测试用的东西</div>
+            <div class="content-main" id="content-main"></div>
         </div>
     </div>
     <div class="footer">Copyright &copy; 2015&nbsp;晓婼.&nbsp;All rights</div>

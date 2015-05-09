@@ -1,4 +1,5 @@
 (function() {
+    var dateArray = [];
     var setWhere = "defaults";
     var storage = {
         classifyArray: ["defaults", "graduate", "corporation", "family", "baidu"],
@@ -18,9 +19,14 @@
             this.addClassify();
             this.loaded();
             this.deleteClassify();
+            if (concise.$("#defaults").children.length > 0) {
+                concise.addClass(concise.$("#defaults").children[0], "otherColor");
+            }
         },
         theTask: function() {
+            this.leftRigthShow();
             this.addTask();
+            this.change();
         },
         saveStorage: function(theGet) {
             var str = JSON.stringify(theGet); //把对象解析成字符串
@@ -104,53 +110,226 @@
         deleteClassify: function() {
             var that = this;
             EventUtil.addHandler(concise.$("#submitD"), "click", function() {
-                var theGet = that.getStorage();
-                var ul = theSpan.parentNode.parentNode.id;
-                var theText = theSpan.parentNode.children[0].innerHTML
-                for(i in theGet[ul]) {
-                    if(i === theText){
-                        delete theGet[ul][i];
-                        that.saveStorage(theGet);
+                console.log(concise.$("#submitD").name)
+                if (concise.$("#submitD").name === "delete") {
+                    var theGet = that.getStorage();
+                    var ul = theSpan.parentNode.parentNode.id;
+                    var theText = theSpan.parentNode.children[0].innerHTML
+                    for (i in theGet[ul]) {
+                        if (i === theText) {
+                            delete theGet[ul][i];
+                            that.saveStorage(theGet);
+                        }
                     }
+                    that.loaded();
+                    that.allFileLoaded();
+                    concise.removeClass(concise.$("#confirm"), "theBlock");
+                    concise.addClass(concise.$("#confirm"), "theNone");
+                } else {
+                    var theGet = that.getStorage();
+                    var tasks, naves;
+                    var theTitle = concise.$("#title-name").innerHTML;
+                    var theTasks = concise.$(".icon-file-empty");
+                    for (var i = 0, len = theTasks.length; i < len; i++) {
+                        if (concise.hasClass(theTasks[i], "otherColor")) {
+                            tasks = theTasks[i].children[0].innerHTML;
+                        }
+                    }
+                    var theNave = concise.$(".icon-folder-open");
+                    for (var j = 0, theLen = theNave.length; j < theLen; j++) {
+                        if (concise.hasClass(theNave[j], "theColor")) {
+                            naves = theNave[j].parentNode.children[1].id;
+                        }
+                    }
+                    var theUse = theGet[naves][tasks][theTitle];
+                    theUse.theSuccess = true;
+                    that.saveStorage(theGet);
+                    concise.removeClass(concise.$("#confirm"), "theBlock");
+                    concise.addClass(concise.$("#confirm"), "theNone");
                 }
-                console.log(theGet[ul]);
-                that.loaded();
-                that.allFileLoaded();
-                concise.removeClass(concise.$("#confirm"), "theBlock");
-                concise.addClass(concise.$("#confirm"), "theNone");
             })
         },
         addTask: function() {
             var that = this;
             EventUtil.addHandler(concise.$("#submitA"), "click", function() {
-                var theGet = that.getStorage();
-                var taskTitle = concise.$("#title").value,
-                    taskTime = concise.$("#date").value,
-                    taskContent = concise.$("#content").value;
-                var theTask = concise.$(".icon-file-empty");
-                for(var i = 0,len = theTask.length; i < len; i++) {
-                    if(concise.hasClass(theTask[i], "otherColor")) {
-                        var theDe = theTask[i].parentNode.id;
-                        var theName = theTask[i].children[0].innerHTML;
-                        theGet[theDe][theName][taskTitle] = {};
-                        theGet[theDe][theName][taskTitle].theDate = taskTime;
-                        theGet[theDe][theName][taskTitle].theContent = taskContent;
-                        theGet[theDe][theName][taskTitle].theSuccess = false;
-                        that.saveStorage(theGet);
-                        var otherGet = that.getStorage();
-                        console.log(otherGet);
-                        /*for(j in otherGet[theDe][theName]) {
-                            if(j.theSuccess === false) {
-
-                            } else {
-
-                            }
-                        }*/
-                        concise.removeClass(concise.$("#editor"), "theBlock");
-                        concise.addClass(concise.$("#editor"), "theNone");
+                if (concise.$("#submitA").name === "task") {
+                    var theGet = that.getStorage();
+                    var taskTitle = concise.$("#title").value,
+                        taskTime = concise.$("#date").value,
+                        taskContent = concise.$("#content").value;
+                    var theTasks = concise.$(".icon-file-empty");
+                    for (var i = 0, len = theTasks.length; i < len; i++) {
+                        if (concise.hasClass(theTasks[i], "otherColor")) {
+                            var theDe = theTasks[i].parentNode.id;
+                            var theName = theTasks[i].children[0].innerHTML;
+                            theGet[theDe][theName][taskTitle] = {};
+                            theGet[theDe][theName][taskTitle].theDate = taskTime;
+                            theGet[theDe][theName][taskTitle].theContent = taskContent;
+                            theGet[theDe][theName][taskTitle].theSuccess = false;
+                            that.saveStorage(theGet);
+                            that.showTask(theDe, theName);
+                            concise.removeClass(concise.$("#editor"), "theBlock");
+                            concise.addClass(concise.$("#editor"), "theNone");
+                        }
                     }
+                } else {
+                    var theGet = that.getStorage();
+                    var tasks, naves;
+                    var theTitle = concise.$("#title").value;
+                    var dates = concise.$("#date").value;
+                    var contents = concise.$("#content").value;
+                    var theTasks = concise.$(".icon-file-empty");
+                    for (var i = 0, len = theTasks.length; i < len; i++) {
+                        if (concise.hasClass(theTasks[i], "otherColor")) {
+                            tasks = theTasks[i].children[0].innerHTML;
+                        }
+                    }
+                    var theNave = concise.$(".icon-folder-open");
+                    for (var j = 0, theLen = theNave.length; j < theLen; j++) {
+                        if (concise.hasClass(theNave[j], "theColor")) {
+                            naves = theNave[j].parentNode.children[1].id;
+                        }
+                    }
+                    var theUse = theGet[naves][tasks][theTitle];
+                    theUse.theDate = dates;
+                    theUse.theContent = contents;
+                    that.saveStorage(theGet);
+                    concise.$("#show-time").innerHTML = theUse.theDate;
+                    concise.$("#content-main").innerHTML = theUse.theContent;
+                    concise.removeClass(concise.$("#editor"), "theBlock");
+                    concise.addClass(concise.$("#editor"), "theNone");
                 }
             });
+        },
+        showTask: function(theDe, theName, listTime) {
+            concise.$("#list-time").innerHTML = "";
+            concise.$("#list-time-finish").innerHTML = "";
+            concise.$("#list-time-unfinish").innerHTML = "";
+            var otherGet = this.getStorage();
+            var listTime = concise.$("#list-time").children;
+            for (j in otherGet[theDe][theName]) {
+                var z = dateArray.some(function(item) {
+                    if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
+                        var theLi = document.createElement('li');
+                        var theA = document.createElement('a');
+                        theA.href = "#";
+                        var theContext = document.createTextNode(j);
+                        theA.appendChild(theContext);
+                        theLi.appendChild(theA);
+                        item.parentNode.children[1].appendChild(theLi);
+                    }
+                    return otherGet[theDe][theName][j].theDate === item.innerHTML;
+                });
+                if (z === false) {
+                    var theParent = document.createElement('li');
+                    theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                    var theLi = document.createElement('li');
+                    var theA = document.createElement('a');
+                    theA.href = "#";
+                    var theContext = document.createTextNode(j);
+                    theA.appendChild(theContext);
+                    theLi.appendChild(theA);
+                    theParent.children[1].appendChild(theLi);
+                    concise.$("#list-time").appendChild(theParent);
+                    dateArray.push(otherGet[theDe][theName][j].theDate);
+                }
+               /* if (otherGet[theDe][theName][j].theSuccess) {
+                    var w = dateArray.some(function(item) {
+                        if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
+                            var theLi = document.createElement('li');
+                            var theA = document.createElement('a');
+                            theA.href = "#";
+                            var theContext = document.createTextNode(j);
+                            theA.appendChild(theContext);
+                            theLi.appendChild(theA);
+                            item.parentNode.children[1].appendChild(theLi);
+                        }
+                        return otherGet[theDe][theName][j].theDate === item.innerHTML;
+                    });
+                    if (w == false) {
+                        var theParent = document.createElement('li');
+                        theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                        var theLi = document.createElement('li');
+                        var theA = document.createElement('a');
+                        theA.href = "#";
+                        var theContext = document.createTextNode(j);
+                        theA.appendChild(theContext);
+                        theLi.appendChild(theA);
+                        theParent.children[1].appendChild(theLi);
+                        concise.$("#list-time-unfinish").appendChild(theParent);
+                    }
+                } else {
+                    var c = dateArray.some(function(item) {
+                        if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
+                            var theLi = document.createElement('li');
+                            var theA = document.createElement('a');
+                            theA.href = "#";
+                            var theContext = document.createTextNode(j);
+                            theA.appendChild(theContext);
+                            theLi.appendChild(theA);
+                            item.parentNode.children[1].appendChild(theLi);
+                        }
+                        return otherGet[theDe][theName][j].theDate === item.innerHTML;
+                    });
+                    if (c == false) {
+                        var theParent = document.createElement('li');
+                        theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                        var theLi = document.createElement('li');
+                        var theA = document.createElement('a');
+                        theA.href = "#";
+                        var theContext = document.createTextNode(j);
+                        theA.appendChild(theContext);
+                        theLi.appendChild(theA);
+                        theParent.children[1].appendChild(theLi);
+                        concise.$("#list-time-finish").appendChild(theParent);
+                    }
+                }*/
+            }
+        },
+        leftRigthShow: function() {
+            var theTasks = concise.$(".icon-file-empty");
+            for (var i = 0, len = theTasks.length; i < len; i++) {
+                if (concise.hasClass(theTasks[i], "otherColor")) {
+                    this.showTask(theTasks[i].parentNode.id, theTasks[i].children[0].innerHTML);
+                }
+            }
+        },
+        change: function() {
+            var theUl = concise.$("#file-senior");
+            var that = this;
+            EventUtil.addHandler(theUl, "click", function(eve) {
+                var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
+                if (concise.hasClass(theEve.parentNode, "icon-file-empty")) {
+                    that.leftRigthShow();
+                }
+            });
+            var cc = [concise.$("#list-time"),concise.$("#list-time-finish"), concise.$("#list-time-unfinish")];
+            for(var j = 0,lens = cc.length; j < lens; j++) {
+                EventUtil.addHandler(cc[j], "click", function(eve) {
+                var theGet = that.getStorage();
+                var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
+                var tasks, naves;
+                if (theEve.tagName.toLowerCase() === 'a') {
+                    var theTasks = concise.$(".icon-file-empty");
+                    for (var i = 0, len = theTasks.length; i < len; i++) {
+                        if (concise.hasClass(theTasks[i], "otherColor")) {
+                            tasks = theTasks[i].children[0].innerHTML;
+                        }
+                    }
+                    var theNave = concise.$(".icon-folder-open");
+                    for (var j = 0, theLen = theNave.length; j < theLen; j++) {
+                        if (concise.hasClass(theNave[j], "theColor")) {
+                            naves = theNave[j].parentNode.children[1].id;
+                        }
+                    }
+                    var theUse = theGet[naves][tasks][theEve.innerHTML];
+                    concise.$("#title-name").innerHTML = theEve.innerHTML;
+                    concise.$("#show-time").innerHTML = theUse.theDate;
+                    concise.$("#content-main").innerHTML = theUse.theContent;
+                }
+                //that.showTask(naves, tasks);
+            });
+            }
         }
     };
     storage.init();

@@ -110,6 +110,7 @@ em {
 }
 .list-time {
     overflow: auto;
+    display: none;
 }
 .list-time div {
     width: 100%;
@@ -285,4 +286,7 @@ em {
 }
 .otherColor {
     color: #238C00;
+}
+.selected {
+    background-color: #fff;
 }
