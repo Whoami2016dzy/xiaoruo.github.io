@@ -16,8 +16,9 @@ html {
  * Remove default margin.
  */
 
-body {
+* {
   margin: 0;
+  padding: 0;
 }
 
 /* HTML5 display definitions
@@ -209,6 +210,7 @@ figure {
  */
 
 hr {
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -354,7 +356,9 @@ input[type="number"]::-webkit-outer-spin-button {
  */
 
 input[type="search"] {
-  -webkit-appearance: textfield; /* 1 */ /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
   box-sizing: content-box;
 }
 
@@ -421,4 +425,8 @@ table {
 td,
 th {
   padding: 0;
+}
+
+ul{
+  padding: 10px;
 }
