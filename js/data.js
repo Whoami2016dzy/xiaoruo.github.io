@@ -1,5 +1,4 @@
 (function() {
-    var dateArray = [];
     var setWhere = "defaults";
     var storage = {
         classifyArray: ["defaults", "graduate", "corporation", "family", "baidu"],
@@ -110,7 +109,6 @@
         deleteClassify: function() {
             var that = this;
             EventUtil.addHandler(concise.$("#submitD"), "click", function() {
-                console.log(concise.$("#submitD").name)
                 if (concise.$("#submitD").name === "delete") {
                     var theGet = that.getStorage();
                     var ul = theSpan.parentNode.parentNode.id;
@@ -168,6 +166,8 @@
                             theGet[theDe][theName][taskTitle].theSuccess = false;
                             that.saveStorage(theGet);
                             that.showTask(theDe, theName);
+                            that.theFinish(theDe, theName);
+                            that.theUnFinish(theDe, theName);
                             concise.removeClass(concise.$("#editor"), "theBlock");
                             concise.addClass(concise.$("#editor"), "theNone");
                         }
@@ -201,14 +201,46 @@
                 }
             });
         },
-        showTask: function(theDe, theName, listTime) {
+        quchong: function(aa) {
+            var theNumber = [];
+            aa.sort(function(a, b) {
+                return a - b
+            });
+            for (var i = 0; i < aa.length; i++) {
+                if (aa[i] != aa[i + 1]) {
+                    theNumber.push(aa[i]);
+                }
+            }
+            return theNumber;
+        },
+        showTask: function(theDe, theName) {
             concise.$("#list-time").innerHTML = "";
-            concise.$("#list-time-finish").innerHTML = "";
-            concise.$("#list-time-unfinish").innerHTML = "";
             var otherGet = this.getStorage();
-            var listTime = concise.$("#list-time").children;
+            var dateArray = [];
             for (j in otherGet[theDe][theName]) {
-                var z = dateArray.some(function(item) {
+                dateArray.push(otherGet[theDe][theName][j].theDate);
+            }
+            dateArray = this.quchong(dateArray);
+            var theParents = document.createElement('li');
+            dateArray.forEach(function(item) {
+                var theLI = document.createElement('li')
+                var theDiv = document.createElement('div');
+                var theText = document.createTextNode(item);
+                var theUl = document.createElement('ul');
+                concise.addClass(theUl, "list-file theBlock");
+                theDiv.appendChild(theText);
+                theLI.appendChild(theDiv);
+                theLI.appendChild(theUl);
+                concise.$("#list-time").appendChild(theLI);
+            })
+            var listTime = concise.$("#list-time").children;
+            var dateArrays = [];
+
+            for (var i = 0, len = listTime.length; i < len; i++) {
+                dateArrays.push(listTime[i].children[0]);
+            }
+            for (j in otherGet[theDe][theName]) {
+                var z = dateArrays.some(function(item) {
                     if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
                         var theLi = document.createElement('li');
                         var theA = document.createElement('a');
@@ -231,59 +263,116 @@
                     theLi.appendChild(theA);
                     theParent.children[1].appendChild(theLi);
                     concise.$("#list-time").appendChild(theParent);
+                }
+            }
+        },
+        theFinish: function(theDe, theName) {
+            var otherGet = this.getStorage();
+            var dateArray = [];
+            for (j in otherGet[theDe][theName]) {
+                if (otherGet[theDe][theName][j].theSuccess) {
                     dateArray.push(otherGet[theDe][theName][j].theDate);
                 }
-               /* if (otherGet[theDe][theName][j].theSuccess) {
-                    var w = dateArray.some(function(item) {
-                        if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
-                            var theLi = document.createElement('li');
-                            var theA = document.createElement('a');
-                            theA.href = "#";
-                            var theContext = document.createTextNode(j);
-                            theA.appendChild(theContext);
-                            theLi.appendChild(theA);
-                            item.parentNode.children[1].appendChild(theLi);
-                        }
-                        return otherGet[theDe][theName][j].theDate === item.innerHTML;
-                    });
-                    if (w == false) {
-                        var theParent = document.createElement('li');
-                        theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+            }
+            dateArray = this.quchong(dateArray);
+            var theParents = document.createElement('li');
+            dateArray.forEach(function(item) {
+                var theLI = document.createElement('li')
+                var theDiv = document.createElement('div');
+                var theText = document.createTextNode(item);
+                var theUl = document.createElement('ul');
+                concise.addClass(theUl, "list-file theBlock");
+                theDiv.appendChild(theText);
+                theLI.appendChild(theDiv);
+                theLI.appendChild(theUl);
+                concise.$("#list-time-unfinish").appendChild(theLI);
+            })
+            var listTime = concise.$("#list-time-unfinish").children;
+            var dateArrays = [];
+
+            for (var i = 0, len = listTime.length; i < len; i++) {
+                dateArrays.push(listTime[i].children[0]);
+            }
+            for (j in otherGet[theDe][theName]) {
+                var w = dateArrays.some(function(item) {
+                    if (otherGet[theDe][theName][j].theDate === item.innerHTML && otherGet[theDe][theName][j].theSuccess === true) {
+                        console.log(otherGet[theDe][theName][j].theContext);
                         var theLi = document.createElement('li');
                         var theA = document.createElement('a');
                         theA.href = "#";
                         var theContext = document.createTextNode(j);
                         theA.appendChild(theContext);
                         theLi.appendChild(theA);
-                        theParent.children[1].appendChild(theLi);
-                        concise.$("#list-time-unfinish").appendChild(theParent);
+                        item.parentNode.children[1].appendChild(theLi);
                     }
-                } else {
-                    var c = dateArray.some(function(item) {
-                        if (otherGet[theDe][theName][j].theDate === item.innerHTML) {
-                            var theLi = document.createElement('li');
-                            var theA = document.createElement('a');
-                            theA.href = "#";
-                            var theContext = document.createTextNode(j);
-                            theA.appendChild(theContext);
-                            theLi.appendChild(theA);
-                            item.parentNode.children[1].appendChild(theLi);
-                        }
-                        return otherGet[theDe][theName][j].theDate === item.innerHTML;
-                    });
-                    if (c == false) {
-                        var theParent = document.createElement('li');
-                        theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                    return otherGet[theDe][theName][j].theDate === item.innerHTML;
+                });
+                if (w == false && otherGet[theDe][theName][j].theSuccess === true) {console.log(j);
+                    var theParent = document.createElement('li');
+                    theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                    var theLi = document.createElement('li');
+                    var theA = document.createElement('a');
+                    theA.href = "#";
+                    var theContext = document.createTextNode(j);
+                    theA.appendChild(theContext);
+                    theLi.appendChild(theA);
+                    theParent.children[1].appendChild(theLi);
+                    concise.$("#list-time-unfinish").appendChild(theParent);
+                }
+            }
+        },
+        theUnFinish: function(theDe, theName) {
+            var otherGet = this.getStorage();
+            var dateArray = [];
+            for (j in otherGet[theDe][theName]) {
+                if (!otherGet[theDe][theName][j].theSuccess) {
+                    dateArray.push(otherGet[theDe][theName][j].theDate);
+                }
+            }
+            dateArray = this.quchong(dateArray);
+            var theParents = document.createElement('li');
+            dateArray.forEach(function(item) {
+                var theLI = document.createElement('li')
+                var theDiv = document.createElement('div');
+                var theText = document.createTextNode(item);
+                var theUl = document.createElement('ul');
+                concise.addClass(theUl, "list-file theBlock");
+                theDiv.appendChild(theText);
+                theLI.appendChild(theDiv);
+                theLI.appendChild(theUl);
+                concise.$("#list-time-finish").appendChild(theLI);
+            })
+            var listTime = concise.$("#list-time-finish").children;
+            var dateArrays = [];
+
+            for (var i = 0, len = listTime.length; i < len; i++) {
+                dateArrays.push(listTime[i].children[0]);
+            }
+            for (j in otherGet[theDe][theName]) {
+                var c = dateArrays.some(function(item) {
+                    if (otherGet[theDe][theName][j].theDate === item.innerHTML && otherGet[theDe][theName][j].theSuccess === false) {
                         var theLi = document.createElement('li');
                         var theA = document.createElement('a');
                         theA.href = "#";
                         var theContext = document.createTextNode(j);
                         theA.appendChild(theContext);
                         theLi.appendChild(theA);
-                        theParent.children[1].appendChild(theLi);
-                        concise.$("#list-time-finish").appendChild(theParent);
+                        item.parentNode.children[1].appendChild(theLi);
                     }
-                }*/
+                    return otherGet[theDe][theName][j].theDate === item.innerHTML;
+                });
+                if (c == false && otherGet[theDe][theName][j].theSuccess === false) {
+                    var theParent = document.createElement('li');
+                    theParent.innerHTML = '<div>' + otherGet[theDe][theName][j].theDate + '</div><ul class="list-file theBlock"></ul>';
+                    var theLi = document.createElement('li');
+                    var theA = document.createElement('a');
+                    theA.href = "#";
+                    var theContext = document.createTextNode(j);
+                    theA.appendChild(theContext);
+                    theLi.appendChild(theA);
+                    theParent.children[1].appendChild(theLi);
+                    concise.$("#list-time-finish").appendChild(theParent);
+                }
             }
         },
         leftRigthShow: function() {
@@ -291,6 +380,8 @@
             for (var i = 0, len = theTasks.length; i < len; i++) {
                 if (concise.hasClass(theTasks[i], "otherColor")) {
                     this.showTask(theTasks[i].parentNode.id, theTasks[i].children[0].innerHTML);
+                    this.theFinish(theTasks[i].parentNode.id, theTasks[i].children[0].innerHTML);
+                    this.theUnFinish(theTasks[i].parentNode.id, theTasks[i].children[0].innerHTML);
                 }
             }
         },
@@ -303,32 +394,33 @@
                     that.leftRigthShow();
                 }
             });
-            var cc = [concise.$("#list-time"),concise.$("#list-time-finish"), concise.$("#list-time-unfinish")];
-            for(var j = 0,lens = cc.length; j < lens; j++) {
+            var cc = [concise.$("#list-time"), concise.$("#list-time-finish"), concise.$("#list-time-unfinish")];
+            for (var j = 0, lens = cc.length; j < lens; j++) {
                 EventUtil.addHandler(cc[j], "click", function(eve) {
-                var theGet = that.getStorage();
-                var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
-                var tasks, naves;
-                if (theEve.tagName.toLowerCase() === 'a') {
-                    var theTasks = concise.$(".icon-file-empty");
-                    for (var i = 0, len = theTasks.length; i < len; i++) {
-                        if (concise.hasClass(theTasks[i], "otherColor")) {
-                            tasks = theTasks[i].children[0].innerHTML;
+                    var theGet = that.getStorage();
+                    var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
+                    var tasks, naves;
+                    if (theEve.tagName.toLowerCase() === 'a') {
+                        var theTasks = concise.$(".icon-file-empty");
+                        for (var i = 0, len = theTasks.length; i < len; i++) {
+                            if (concise.hasClass(theTasks[i], "otherColor")) {
+                                tasks = theTasks[i].children[0].innerHTML;
+                            }
                         }
-                    }
-                    var theNave = concise.$(".icon-folder-open");
-                    for (var j = 0, theLen = theNave.length; j < theLen; j++) {
-                        if (concise.hasClass(theNave[j], "theColor")) {
-                            naves = theNave[j].parentNode.children[1].id;
+                        var theNave = concise.$(".icon-folder-open");
+                        for (var j = 0, theLen = theNave.length; j < theLen; j++) {
+                            if (concise.hasClass(theNave[j], "theColor")) {
+                                naves = theNave[j].parentNode.children[1].id;
+                            }
                         }
+                        var theUse = theGet[naves][tasks][theEve.innerHTML];
+                        concise.$("#title-name").innerHTML = theEve.innerHTML;
+                        concise.$("#show-time").innerHTML = theUse.theDate;
+                        concise.$("#content-main").innerHTML = theUse.theContent;
                     }
-                    var theUse = theGet[naves][tasks][theEve.innerHTML];
-                    concise.$("#title-name").innerHTML = theEve.innerHTML;
-                    concise.$("#show-time").innerHTML = theUse.theDate;
-                    concise.$("#content-main").innerHTML = theUse.theContent;
-                }
-                //that.showTask(naves, tasks);
-            });
+                   /* that.theFinish(naves, tasks);
+                    that.theUnFinish(naves, tasks);*/
+                });
             }
         }
     };

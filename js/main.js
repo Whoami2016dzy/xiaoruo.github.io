@@ -111,8 +111,20 @@ var concise = {
         },
         theTime: function() {
             var theUl = concise.$("#list-time");
+            var theUl1 = concise.$("#list-time-unfinish");
+            var theUl2 = concise.$("#list-time-finish");
             var that = this;
             EventUtil.addHandler(theUl, "click", function(eve) {
+                if (EventUtil.getTarget(EventUtil.getEvent(eve)).tagName.toLowerCase() === 'div') {
+                    that.theDisplay(eve);
+                }
+            });
+            EventUtil.addHandler(theUl1, "click", function(eve) {
+                if (EventUtil.getTarget(EventUtil.getEvent(eve)).tagName.toLowerCase() === 'div') {
+                    that.theDisplay(eve);
+                }
+            });
+            EventUtil.addHandler(theUl2, "click", function(eve) {
                 if (EventUtil.getTarget(EventUtil.getEvent(eve)).tagName.toLowerCase() === 'div') {
                     that.theDisplay(eve);
                 }
