@@ -57,7 +57,7 @@ em {
     height: 100%;
     padding-top: 10px;
 }
-.subord-file>li {
+.subord-file > li {
     padding: 5px;
     height: 12px;
     overflow: hidden;
@@ -102,7 +102,7 @@ em {
     display: inline-block;
     padding: 3px 8px;
     border: 1px solid #CCC;
-    font-size: 0.7em;
+    font-size: .7em;
     margin: 9px 5px;
 }
 .list-status a:first-child {
@@ -120,7 +120,7 @@ em {
     background-color: #FAFAEE;
     border-bottom: 1px solid #F0F0F0;
 }
-.list-file>li {
+.list-file > li {
     padding: 5px;
     color: #000;
 }
@@ -172,7 +172,7 @@ em {
     background-color: #DDD;
     text-align: center;
     line-height: 45px;
-    font-size: 0.9em;
+    font-size: .9em;
 }
 
 /*弹出层*/
@@ -263,7 +263,7 @@ em {
 .editor textarea {
     width: 170px;
     height: 100px;
-    resize:none;
+    resize: none;
     border-radius: 5px;
 }
 .editor button {
@@ -282,11 +282,14 @@ em {
 }
 .theColor {
     font-weight: bold;
-    color :#238C00;
+    color: #238C00;
 }
 .otherColor {
     color: #238C00;
 }
 .selected {
     background-color: #fff;
+}
+.errorChecking {
+    border: 1px solid red;
 }

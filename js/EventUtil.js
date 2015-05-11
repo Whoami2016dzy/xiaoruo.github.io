@@ -10,13 +10,15 @@ var EventUtil = {
      * @param {[String]} type    [事件类型]
      * @param {[Function]} handler [事件函数]
      */
-    addHandler: function(element, type, handler) {
+    addHandler: function (element, type, handler) {
         if (element.addEventListener) {
             element.addEventListener(type, handler, false);
-        } else if (element.attachEvent) {
-            element.attachEvent("on" + type, handler);
-        } else {
-            element["on" + type] = handler;
+        }
+        else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+        else {
+            element['on' + type] = handler;
         }
     },
 
@@ -26,13 +28,15 @@ var EventUtil = {
      * @param {[String]} type    [事件类型]
      * @param {[Function]} handler [事件函数]
      */
-    removeHandler: function(element, type, handler) {
+    removeHandler: function (element, type, handler) {
         if (element.removeEventListener) {
             element.removeEventListener(type, handler, false);
-        } else if (element.detachEvent) {
-            element.detachEvent("on" + type, handler);
-        } else {
-            element["on" + type] = null;
+        }
+        else if (element.detachEvent) {
+            element.detachEvent('on' + type, handler);
+        }
+        else {
+            element['on' + type] = null;
         }
     },
 
@@ -41,7 +45,7 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
      * @return {[Object]}       [事件对象]
      */
-    getEvent: function(event) {
+    getEvent: function (event) {
         return event ? event : window.event;
     },
 
@@ -50,7 +54,7 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
      * @return {[Object]}       [事件目标]
      */
-    getTarget: function(event) {
+    getTarget: function (event) {
         return event.target || event.srcElement;
     },
 
@@ -59,14 +63,17 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
     * @return {[Object]}       [相关节点]
      */
-    getRelatedTarget: function(event) {
+    getRelatedTarget: function (event) {
         if (event.relatedTarget) {
             return event.relatedTarget;
-        } else if (event.toElement) {
+        }
+        else if (event.toElement) {
             return event.toElement;
-        } else if (event.fromElement) {
+        }
+        else if (event.fromElement) {
             return event.fromElement;
-        } else {
+        }
+        else {
             return null;
         }
 
@@ -76,10 +83,11 @@ var EventUtil = {
      * [preventDefault 取消默认事件]
      * @param  {[Object]} event [事件对象]
      */
-    preventDefault: function(event) {
+    preventDefault: function (event) {
         if (event.preventDefault) {
             event.preventDefault();
-        } else {
+        }
+        else {
             event.returnValue = false;
         }
     },
@@ -88,10 +96,11 @@ var EventUtil = {
      * [stopPropagation 取消事件的冒泡或捕获行为]
      * @param  {[Object]} event [事件对象]
      */
-    stopPropagation: function(event) {
+    stopPropagation: function (event) {
         if (event.stopPropagation) {
             event.stopPropagation();
-        } else {
+        }
+        else {
             event.cancelBubble = true;
         }
     },
@@ -102,10 +111,11 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
      * @return {[number]}       [键盘码]
      */
-    getCharCode: function(event) {
-        if (typeof event.charCode == "number") {
+    getCharCode: function (event) {
+        if (typeof event.charCode == 'number') {
             return event.charCode;
-        } else {
+        }
+        else {
             return event.keyCode;
         }
     },
@@ -114,10 +124,11 @@ var EventUtil = {
      * [getButton 获取鼠标按键]
      * @param  {[Object]} event [事件对象]
      */
-    getButton: function(event) {
-        if (document.implementation.hasFeature("MouseEvents", "2.0")) {
+    getButton: function (event) {
+        if (document.implementation.hasFeature('MouseEvents', '2.0')) {
             return event.button;
-        } else {
+        }
+        else {
             switch (event.button) {
                 case 0://没有按下按钮
                 case 1://按下主鼠标按钮
@@ -139,10 +150,11 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
      * @return {[Number]}       [鼠标滚轮数值]上滚为正下滚为负
      */
-    getWheelDelta: function(event) {
+    getWheelDelta: function (event) {
         if (event.wheelDelta) {
             return (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);
-        } else {
+        }
+        else {
             return -event.detail * 40;
         }
     },
@@ -153,9 +165,9 @@ var EventUtil = {
      * @param  {[Object]} event [事件对象]
      * @return {[String]}       [剪切板数据]
      */
-    getClipboardText: function(event) {
+    getClipboardText: function (event) {
         var clipboardData = (event.clipboardData || window.clipboardData);
-        return clipboardData.getData("text");
+        return clipboardData.getData('text');
     },
 
 
@@ -163,11 +175,12 @@ var EventUtil = {
      * [setClipboardText 为剪切板赋予数据]
      * @param  {[Object]} event [事件对象]
      */
-    setClipboardText: function(event, value) {
+    setClipboardText: function (event, value) {
         if (event.clipboardData) {
-            event.clipboardData.setData("text/plain", value);
-        } else if (window.clipboardData) {
-            window.clipboardData.setData("text", value);
+            event.clipboardData.setData('text/plain', value);
+        }
+        else if (window.clipboardData) {
+            window.clipboardData.setData('text', value);
         }
     }
 };
