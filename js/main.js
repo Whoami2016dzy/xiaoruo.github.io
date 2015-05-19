@@ -158,7 +158,7 @@ var ownTask = {
             } else if (theEve.tagName.toLowerCase() === 'a') {
                 that.choose[3] = theEve.innerHTML;
                 that.choose[2] = theEve.parentNode.parentNode.parentNode.children[0].innerHTML;
-                var folder = concise.$('#list-time').getElementsByTagName('a');
+                var folder = theUl1.getElementsByTagName('a');
                 for (var i = 0, len = folder.length; i < len; i++) {
                     if (folder[i] === EventUtil.getTarget(EventUtil.getEvent(eve))) {
                         concise.addClass(folder[i], 'theColor');
@@ -176,7 +176,7 @@ var ownTask = {
             } else if (theEve.tagName.toLowerCase() === 'a') {
                 that.choose[3] = theEve.innerHTML;
                 that.choose[2] = theEve.parentNode.parentNode.parentNode.children[0].innerHTML;
-                var folder = concise.$('#list-time').getElementsByTagName('a');
+                var folder = theUl2.getElementsByTagName('a');
                 for (var i = 0, len = folder.length; i < len; i++) {
                     if (folder[i] === EventUtil.getTarget(EventUtil.getEvent(eve))) {
                         concise.addClass(folder[i], 'theColor');
@@ -194,7 +194,7 @@ var ownTask = {
             } else if (theEve.tagName.toLowerCase() === 'a') {
                 that.choose[3] = theEve.innerHTML;
                 that.choose[2] = theEve.parentNode.parentNode.parentNode.children[0].innerHTML;
-                var folder = concise.$('#list-time').getElementsByTagName('a');
+                var folder = theUl3.getElementsByTagName('a');
                 for (var i = 0, len = folder.length; i < len; i++) {
                     if (folder[i] === EventUtil.getTarget(EventUtil.getEvent(eve))) {
                         concise.addClass(folder[i], 'theColor');
