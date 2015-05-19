@@ -1,4 +1,4 @@
-(function() {
+(function () {
     var storage = {
         classifyArray: ['defaults', 'graduate', 'corporation', 'family', 'baidu'],
         theData: {
@@ -8,7 +8,7 @@
             family: {},
             baidu: {}
         },
-        init: function() {
+        init: function () {
             this.theData = this.getStorage() || this.theData;
             this.saveStorage(this.theData);
             this.addValue();
@@ -16,24 +16,24 @@
             this.showTask(ownTask.choose[0], ownTask.choose[1]);
             this.change();
         },
-        addValue: function() {
+        addValue: function () {
             this.fileLoad();
             this.addTask();
             this.deleteTask();
         },
-        saveStorage: function(theGet) {
-            var str = JSON.stringify(theGet); //把对象解析成字符串
+        saveStorage: function (theGet) {
+            var str = JSON.stringify(theGet);
             localStorage.setItem('storage', str);
         },
-        getStorage: function() {
+        getStorage: function () {
             var value = localStorage.getItem('storage');
             return JSON.parse(value);
         },
-        addTask: function() {
+        addTask: function () {
             var that = this;
             var getData = this.getStorage();
-            EventUtil.addHandler(concise.$("#submit"), "click", function() {
-                var newName = concise.$("#newName").value;
+            EventUtil.addHandler(concise.$('#submit'), 'click', function () {
+                var newName = concise.$('#newName').value;
                 getData[ownTask.choose[0]][newName] = {};
                 that.saveStorage(getData);
                 concise.removeClass(concise.$('#prompt'), 'theBlock');
@@ -56,9 +56,9 @@
                 that.allFileLoad();
             });
         },
-        deleteTask: function() {
+        deleteTask: function () {
             var that = this;
-            EventUtil.addHandler(concise.$('#submitD'), 'click', function() {
+            EventUtil.addHandler(concise.$('#submitD'), 'click', function () {
                 if (concise.$('#submitD').name === 'delete') {
                     var theData = that.getStorage();
                     delete theData[ownTask.choose[0]][ownTask.choose[1]];
@@ -67,7 +67,8 @@
                     concise.addClass(concise.$('#confirm'), 'theNone');
                     that.fileLoad();
                     that.allFileLoad();
-                } else {
+                }
+                else {
                     var theData = that.getStorage();
                     var a = theData[ownTask.choose[0]][ownTask.choose[1]][ownTask.choose[2]][ownTask.choose[3]];
                     a.success = true;
@@ -79,13 +80,13 @@
                 that.showTask(ownTask.choose[0], ownTask.choose[1]);
             });
         },
-        taskNumber: function() {
-            var number = concise.$("#" + ownTask.choose[0]).children.length;
+        taskNumber: function () {
+            var number = concise.$('#' + ownTask.choose[0]).children.length;
             concise.$('#' + ownTask.choose[0]).parentNode.children[0].children[0].innerHTML = number;
             var len = concise.$('#allFile').children.length;
             concise.$('#allFile').parentNode.children[0].children[0].innerHTML = len;
         },
-        allFileLoad: function() {
+        allFileLoad: function () {
             var theGet = this.getStorage();
             concise.$('#allFile').innerHTML = '';
             for (var j = 0; j < this.classifyArray.length; j++) {
@@ -103,7 +104,7 @@
                 ownTask.choose[1] = concise.$('#defaults').children[0].children[0].innerHTML;
             }
         },
-        fileLoad: function() {
+        fileLoad: function () {
             var theGet = this.getStorage();
             for (var j = 0; j < this.classifyArray.length; j++) {
                 concise.$('#' + this.classifyArray[j]).innerHTML = '';
@@ -124,10 +125,10 @@
             }
             this.allFileLoad();
         },
-        addTodo: function() {
+        addTodo: function () {
             var that = this;
-            EventUtil.addHandler(concise.$("#submitA"), "click", function() {
-                if (concise.$("#submitA").name === 'task') {
+            EventUtil.addHandler(concise.$('#submitA'), 'click', function () {
+                if (concise.$('#submitA').name === 'task') {
                     var taskTitle = concise.$('#title').value,
                         taskTime = concise.$('#date').value,
                         taskContent = concise.$('#content').value;
@@ -159,7 +160,7 @@
                     delete theUse[ownTask.choose[2]][ownTask.choose[3]];
                     that.saveStorage(theGet);
                     that.showTask(ownTask.choose[0], ownTask.choose[1]);
-                    concise.$("#title-name").innerHTML = theUse[dates][titles];
+                    concise.$('#title-name').innerHTML = theUse[dates][titles];
                     concise.$('#show-time').innerHTML = theUse[dates];
                     concise.$('#content-main').innerHTML = theUse[dates][titles].content;
                     concise.removeClass(concise.$('#editor'), 'theBlock');
@@ -167,10 +168,10 @@
                 }
             });
         },
-        showTask: function(theDe, theName) {
+        showTask: function (theDe, theName) {
             var theGet = this.getStorage();
             var a = theGet[theDe][theName];
-            concise.$("#list-time").innerHTML = '';
+            concise.$('#list-time').innerHTML = '';
             for (var j in a) {
                 var theTime = document.createTextNode(j);
                 var theDiv = document.createElement('div');
@@ -180,7 +181,7 @@
                 theDiv.appendChild(theTime);
                 theLi.appendChild(theDiv);
                 theLi.appendChild(theUl);
-                concise.$("#list-time").appendChild(theLi);
+                concise.$('#list-time').appendChild(theLi);
                 for (var p in a[j]) {
                     var c = document.createElement('li');
                     var d = document.createElement('a');
@@ -191,7 +192,7 @@
                     theUl.appendChild(c);
                 }
             }
-            concise.$("#list-time-unfinish").innerHTML = '';
+            concise.$('#list-time-unfinish').innerHTML = '';
             for (var k in a) {
                 var theTime = document.createTextNode(k);
                 var theDiv = document.createElement('div');
@@ -201,7 +202,7 @@
                 theDiv.appendChild(theTime);
                 theLi.appendChild(theDiv);
                 theLi.appendChild(theUl);
-                concise.$("#list-time-unfinish").appendChild(theLi);
+                concise.$('#list-time-unfinish').appendChild(theLi);
                 for (var l in a[k]) {
                     if (a[k][l].success === false) {
                         var c = document.createElement('li');
@@ -214,7 +215,7 @@
                     }
                 }
             }
-            concise.$("#list-time-finish").innerHTML = '';
+            concise.$('#list-time-finish').innerHTML = '';
             for (var z in a) {
                 var theTime = document.createTextNode(z);
                 var theDiv = document.createElement('div');
@@ -224,7 +225,7 @@
                 theDiv.appendChild(theTime);
                 theLi.appendChild(theDiv);
                 theLi.appendChild(theUl);
-                concise.$("#list-time-finish").appendChild(theLi);
+                concise.$('#list-time-finish').appendChild(theLi);
                 for (var f in a[z]) {
                     if (a[z][f].success === true) {
                         var c = document.createElement('li');
@@ -238,10 +239,10 @@
                 }
             }
         },
-        change: function() {
+        change: function () {
             var theUl = concise.$('#file-senior');
             var that = this;
-            EventUtil.addHandler(theUl, 'click', function(eve) {
+            EventUtil.addHandler(theUl, 'click', function (eve) {
                 var theEve = EventUtil.getTarget(EventUtil.getEvent(eve));
                 if (concise.hasClass(theEve.parentNode, 'icon-file-empty')) {
                     that.showTask(ownTask.choose[0], ownTask.choose[1]);

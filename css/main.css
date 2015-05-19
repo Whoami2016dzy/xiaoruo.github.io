@@ -80,17 +80,17 @@ li {
     position: absolute;
     right: 0;
     margin-top: 2px;
-    font-size: 0.5em;
-    color: rgba(0,0,0,0);
+    font-size: .5em;
+    color: rgba(0, 0, 0, 0);
 }
 .subord-file li:hover {
     border-bottom: 1px solid #CCC;
 }
 .senior-subord li:hover .icon-cross {
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 .senior-subord span.icon-cross:hover {
-    color: rgba(0,0,0,1);
+    color: rgba(0, 0, 0, 1);
 }
 .main-list {
     float: left;
@@ -289,7 +289,4 @@ li {
 }
 .selected {
     background-color: #fff;
-}
-.errorChecking {
-    border: 1px solid red;
 }
