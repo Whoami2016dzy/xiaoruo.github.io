@@ -245,7 +245,12 @@ var ownTask = {
         var that = this;
         EventUtil.addHandler(concise.$('#over'), 'click', function () {
             if (concise.$('#show-time').innerHTML !== '') {
-                that.showChange('change');
+                if(!concise.hasClass(concise.$("#list-time-finish"), 'theBlock')) {
+                    that.showChange('change');
+                }
+                else {
+                    alert('此任务已完成！');
+                }
             } else {
                 alert('请选中任务后再执行此操作！');
             }
