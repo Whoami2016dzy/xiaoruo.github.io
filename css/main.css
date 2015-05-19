@@ -9,6 +9,9 @@ a {
 em {
     font-style: normal;
 }
+li {
+    cursor: pointer;
+}
 /*clearfix*/
 .clearfix:after {
     content: ".";
@@ -71,6 +74,7 @@ em {
     padding-left: 20px;
     line-height: 40px;
     background-color: #F2F2F2;
+    cursor: pointer;
 }
 .senior-subord .icon-cross {
     position: absolute;
@@ -144,13 +148,13 @@ em {
 .content-title .icon {
     font-size: 1.2em;
     line-height: 50px;
+    position: absolute;
+    cursor: pointer;
 }
 .content-title .icon-checkmark {
-    position: absolute;
     right: 60px;
 }
 .content-title .icon-pencil {
-    position: absolute;
     right: 20px;
 }
 .content-time {
@@ -281,10 +285,6 @@ em {
     display: none;
 }
 .theColor {
-    font-weight: bold;
-    color: #238C00;
-}
-.otherColor {
     color: #238C00;
 }
 .selected {
