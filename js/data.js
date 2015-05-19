@@ -160,8 +160,8 @@
                     delete theUse[ownTask.choose[2]][ownTask.choose[3]];
                     that.saveStorage(theGet);
                     that.showTask(ownTask.choose[0], ownTask.choose[1]);
-                    concise.$('#title-name').innerHTML = theUse[dates][titles];
-                    concise.$('#show-time').innerHTML = theUse[dates];
+                    concise.$('#title-name').innerHTML = titles;
+                    concise.$('#show-time').innerHTML = dates;
                     concise.$('#content-main').innerHTML = contents;
                     concise.removeClass(concise.$('#editor'), 'theBlock');
                     concise.addClass(concise.$('#editor'), 'theNone');
