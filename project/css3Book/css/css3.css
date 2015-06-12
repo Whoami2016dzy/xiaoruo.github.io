@@ -45,7 +45,6 @@ body {
     position: absolute;
     overflow: hidden;
     border-left: 2px solid #000;
-    background: #232323;
 }
 .left{
      -webkit-transform: translate3d(0px, 0px, 0.02px);
@@ -53,7 +52,7 @@ body {
     -ms-transform: translate3d(0px, 0px, 0.02px);
     -o-transform: translate3d(0px, 0px, 0.02px);
     transform: translate3d(0px, 0px, 0.02px);
-    /*background: url(../images/page1.png);*/
+    background: url(../images/page1.png);
 }
 .right{
     -webkit-transform: rotateY(180deg);
@@ -61,7 +60,7 @@ body {
     -ms-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
-    /*background: url(../images/page.png);*/
+    background: url(../images/page.png);
 }
  .book > div:first-child > div:first-child, .book > div:last-child > div:last-child {
     border:0px;
