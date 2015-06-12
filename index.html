@@ -2,120 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人任务管理系统</title>
-    <link rel="icon" href="./images/title.ioc" type="image/x-iocn">
-    <link rel="stylesheet" href="./css/Normalize.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <title>晓婼</title>
+    <link rel="icon" href="./images/logo.ioc" type="image/x-iocn">
     <link rel="stylesheet" href="./css/main.css"></head>
 <body>
-    <div class="header">
-        <span class="logo">晓婼</span>
+    <div class="main" id="main">
+        <ul class="small">
+            <li>
+                <a href="javascript:void(0);" class="author" id="author">XIAORUO</li>
+            </a>
+            <li>
+                <a href="mailto:tian.ruo@outlook.com" target="_blank">MAIL</li>
+            </a>
+            <li>
+                <a href="http://weibo.com/u/3315650703" target="_blank">WEIBO</li>
+            </a>
+        </ul>
+        <ul class="big">
+            <li>
+                <a href="./project/project.html">PROJECT</li>
+            </a>
+            <li>
+                <a href="http://www.cnblogs.com/xiaoruo/" target="_blank">BLOG</li>
+            </a>
+            <li>
+                <a href="github.com/xiaoruo" target="_blank">CODE</li>
+            </a>
+            <li>
+                <a href="http://www.w3cplus.com/blogs/%E6%99%93%E5%A9%BC" target="_blank">TRANSLATED</li>
+            </a>
+            <li>
+                <a href="resume.html">RESUME</li>
+            </a>
+        </ul>
     </div>
-    <div class="main clearfix">
-        <div class="main-file" id="main-file">
-            <ul class="file-senior" id="file-senior">
-                <li>
-                    <span>所有任务(<em>0</em>)</span>
-                    <ul class="senior-subord theNone" id="allFile"></ul>
-                </li>
-                <li>
-                    <span>分类列表(<em>5</em>)</span>
-                    <ul class="senior-subord theBlock">
-                        <li>
-                            <span class="icon icon-folder-open theColor">默认分类(<em>0</em>)</span>
-                            <ul class="subord-file theBlock" id="defaults"></ul>
-                        </li>
-                        <li>
-                            <span class="icon icon-folder-open">毕业设计(<em>0</em>)</span>
-                            <ul class="subord-file theNone" id="graduate"></ul>
-                        </li>
-                        <li>
-                            <span class="icon icon-folder-open">社员活动(<em>0</em>)</span>
-                            <ul class="subord-file theNone" id="corporation"></ul>
-                        </li>
-                        <li>
-                            <span class="icon icon-folder-open">家庭生活(<em>0</em>)</span>
-                            <ul class="subord-file theNone" id="family"></ul>
-                        </li>
-                        <li>
-                            <span class="icon icon-folder-open">百度IFE项目(<em>0</em>)</span>
-                            <ul class="subord-file theNone" id="baidu"></ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="file-add icon icon-plus" id="addCategory">新增分类</div>
-        </div>
-        <div class="main-list">
-            <div class="list-status" id="list-status">
-                <a href="javascript:void(0);" class="selected">所有</a>
-                <a href="javascript:void(0);">已完成</a>
-                <a href="javascript:void(0);">未完成</a>
-            </div>
-            <ul class="list-time theBlock" id="list-time">
-                <!-- 动态插入事件 所有-->
-            </ul>
-            <ul class="list-time" id="list-time-unfinish">
-                <!-- 动态插入事件 未完成-->
-            </ul>
-            <ul class="list-time" id="list-time-finish">
-                <!-- 动态插入事件 已完成-->
-            </ul>
-            <div class="file-add icon icon-plus" id="addTask">新增任务</div>
-        </div>
-        <div class="main-content">
-            <div class="content-title">
-                <span class="title-name" id="title-name">任务名称</span>
-                <span class="icon icon-checkmark" id="over" title="任务完成"></span>
-                <span class="icon icon-pencil" id="change" title="编辑任务"></span>
-            </div>
-            <div class="content-time">
-                任务日期：
-                <span id="show-time"></span>
-            </div>
-            <div class="content-main" id="content-main"></div>
-        </div>
-    </div>
-    <div class="footer">Copyright &copy; 2015&nbsp;晓婼.&nbsp;All rights</div>
-    <div class="prompt theNone" id="prompt">
-        <h6>添加分类</h6>
+    <div class="popups none" id="popups">
+        <!-- <div class="my-photo"></div> -->
         <p>
-            <label for="newName">输入名称：</label>
-            <input type="text" id="newName">
+            晓婼
+            <span>——大连民族大学在校生，热爱前端，热爱美食。希望加入一个优秀的团队，快乐的工作，快乐的玩耍~~</span>
         </p>
         <p>
-            <button id="submit" type="submit">确认</button>
-            <button id="cancel">取消</button>
+            <span>TIAN.RUO@OUTLOOK.COM</span> /
+            <span>188 4082 1390</span>
         </p>
     </div>
-    <div class="editor theNone" id="editor">
-        <h6>添加编辑任务</h6>
-        <p>
-            <label for="title">标题：</label>
-            <input type="text" id="title">
-        </p>
-        <p>
-            <label for="date">日期：</label>
-            <input type="date" id="date">
-        </p>
-        <p>
-            <label for="content">内容：</label>
-            <textarea type="text" id="content"></textarea>
-        </p>
-        <p>
-            <button id="submitA" type="submit">确认</button>
-            <button id="cancelA">取消</button>
-        </p>
-    </div>
-    <div class="confirm theNone" id="confirm">
-        <h6>确认执行操作</h6>
-        <p>
-            <button id="submitD" type="submit">确认</button>
-            <button id="cancelD">取消</button>
-        </p>
-    </div>
-    <script src="./js/EventUtil.js"></script>
+    <script src="./js/tool.js"></script>
     <script src="./js/main.js"></script>
-    <script src="./js/data.js"></script>
+    <script>
+        xiaoRuo.popups();
+    </script>
 </body>
 </html>

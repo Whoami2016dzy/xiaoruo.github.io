@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="./css/css3.css">
+	<title>my book</title>
+</head>
+<body>
+	<div id="myBook">
+		<div class="book">
+			<div>
+				<div class="left"></div>
+				<div class="right">
+					<h1>This is my creative resume</h1>
+				</div>
+			</div>
+			<div>
+				<div class="book-pages left">
+					<p>1</p>
+					<div class="photo"></div>
+					<div class="hello">HELLO，很荣幸您可以翻阅我的书籍~</div>
+					<div class="schedule schedule_1"style="background: url(./images/100.png)">100%</div>
+					<div class="schedule schedule_2" style="background: url(./images/2.png)">70%</div>
+					<div class="schedule schedule_3" style="background: url(./images/60.png)">60%</div>
+					<div class="schedule schedule_4" style="background: url(./images/50.png)">50%</div>
+				</div>
+				<div class="book-pages right">
+					<p>2</p>
+				</div>
+			</div>
+			<div>
+				<div class="book-pages left">
+					<p>3</p>
+				</div>
+				<div class="book-pages right">
+					<p>4</p>
+				</div>
+			</div>
+			<div>
+				<div class="book-pages left">
+					<p>5</p>
+				</div>
+				<div class="book-pages right">
+					<p>6</p>
+				</div>
+			</div>
+			<div>
+				<div class="book-pages left">
+					<p>7</p>
+				</div>
+				<div class="book-pages right"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var books = document.querySelectorAll('.book');
+		for (var i = 0; i < books.length; i++) {
+			var book = books[i];
+			var pages = book.childNodes;
+			for (var j = 0; j < pages.length; j++) {
+			    if (pages[j].tagName == "DIV") {
+				    setTransform(pages[j], 'translate3d(0px, 0px, '+(-j)+'px)');
+			    }
+		    }
+		}
+		var px,py,sx,sy,down,rot=0,rotX=0,rotY=0,cancel;
+		var cardPage = document.querySelector('#myBook > div');
+		var pages = document.querySelectorAll('#myBook > div > div');
+		var currentPage = 0;
+		window.onmousedown = function(ev) {
+			down = true;
+			cancel = false;
+			sx = px = ev.clientX;
+			sy = py = ev.clientY;
+			ev.preventDefault();
+		}
+		window.onmouseup = function(ev) {
+			down = false;
+		}
+		window.onmousemove = function(ev) {
+			if (down) {
+			    var x = ev.clientX;
+			    var y = ev.clientY;
+			    var dx = x-px;
+			    px = x;
+			    cancel = cancel || ((x-sx)*(x-sx)+(y-sy)*(y-sy) > 25);
+			    rotY -= dx * 1;
+			    setTransform(cardPage, 'rotateY('+rotY+'deg)');
+			    ev.preventDefault();
+			}
+		}
+		window.onclick = function(ev) {
+			if (cancel) return;
+			if (ev.clientX < 800) {
+				previousPage();
+			} else {
+				nextPage();
+			}
+			ev.preventDefault();
+		}
+		function previousPage(){
+			if (currentPage > 0) {
+				currentPage--;
+				setTransform(pages[currentPage], 'translate3d(0px,0px,'+(-currentPage)+'px) rotateY(0deg)');
+			}
+		}
+		function nextPage(){
+			if (currentPage < pages.length) {
+				setTransform(pages[currentPage], 'translate3d(0px,0px,'+currentPage+'px) rotateY(-150deg)');
+				currentPage++;
+			}
+		}
+		function setTransform(e,v){
+			var s = e.style;
+			s.webkitTransform =
+			s.MozTransform =
+			s.msTransform =
+			s.OTransform =
+			s.transform = v;
+		}
+	</script></body>
+</html>

@@ -1,0 +1,30 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+::selection {
+background:#4AD8BF;
+color:#fff;
+}
+a{
+	text-decoration: none;
+}
+.clearfix:after{
+	content:"";
+	display:block;
+	height:0;
+	overflow:hidden;
+	clear:both;
+}
+.clearfix{
+	*zoom:1;
+}
+.onError{
+	color: red;
+	font-size: 1.0em;
+}
+.onSuccess{
+	color: #40D88E;
+	font-size: 1.0em;
+}

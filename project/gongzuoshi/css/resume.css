@@ -1,0 +1,81 @@
+body{
+	background-color: #7191A8;
+	font-family: "楷体";
+}
+.photo{
+	text-align: center;
+	margin-top: 40px;
+}
+.photo img{
+	width: 250px;
+	height: 70px;
+}
+.main{
+	width: 590px;
+	height: 850px;
+	background-color: #fff;
+	margin: 20px auto;
+	padding: 2px;
+	border-radius: 2px;
+}
+.main-top{
+	width: 100%;
+	height: 150px;
+	background: url(../images/tou.jpg) no-repeat;
+	color: #fff;
+	font-size: 2.0em;
+	text-align: center;
+	line-height: 150px;
+}
+.main-forms{
+	width: 571px;
+	margin: 0 auto;
+}
+.main-forms h4{
+	font-weight: bold;
+	padding: 10px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #c3c3c3;
+}
+form input,form textarea{
+	border: 1px solid #c3c3c3;
+	border-radius: 5px;
+	resize: none;
+}
+form label{
+	font-size: 1.2em;
+	color: #3c3c3c;
+}
+form p{
+	padding: 10px 0;
+}
+form input[type="text"]{
+	height: 25px;
+	width: 570px;
+}
+form a{
+	display: inline-block;
+	text-align: center;
+	line-height: 30px;
+	margin:0 365px 0 50px;
+}
+form a,form input[type=submit]{
+	font-family: "楷体";
+	font-size: 1em;
+	width: 50px;
+	height: 30px;
+	background-color: #7191A8;
+	border-radius: 2px;
+	color:#fff;
+	margin-top: 15px;
+}
+.copy{
+	color: #fff;
+	text-align: center;
+	margin: 20px 0;
+}
+.formtips{
+	width: 200px;
+	margin:2px;
+	padding:2px;
+}

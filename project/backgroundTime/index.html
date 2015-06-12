@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间背景色</title>
+	<style>
+		#time{
+			width: 700px;
+			height: 300px;
+			margin: 100px auto;
+			font-size: 150px;
+			text-align: center;
+			color:#fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="time"></div>
+</body>
+<script>
+	showTimes();
+	function showTimes() {
+		var t = new Date();
+		var hour = t.getHours() <= 9 ? '0' + t.getHours() : t.getHours();
+		var minute = t.getMinutes() <= 9 ? '0' + t.getMinutes() : t.getMinutes();
+		var second = t.getSeconds() <= 9 ? '0' + t.getSeconds() : t.getSeconds();
+		var show =  hour + ":" + minute + ":" + second + " " ;
+		var time = document.getElementById("time");
+		time.innerHTML = show;
+		var bgColor  = "#" + second + hour+ minute;
+		document.body.style.backgroundColor = bgColor;
+		setTimeout(showTimes,1000);
+	}
+</script>
+</html>

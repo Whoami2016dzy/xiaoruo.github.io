@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工作室综合信息服务平台</title>
+	<link rel="icon" href="./images/ioc.ioc" type="image/x-iocn">
+	<link rel="stylesheet" href="./css/total.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="./css/resume.css">
+	<script src="./js/jquery.1.4.2-min.js" type="text/javascript"></script>
+	<script src="./js/jquery.color.js" type="text/javascript"></script>
+	<script src="./js/validate.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="photo">
+		<a href="index.html"><img src="./images/logo.png" /></a>
+	</div>
+	<div class="main">
+		<div class="main-top">我的简历</div>
+		<div class="main-forms">
+			<h4>请输入真实的个人信息，以方便工作室对各位同学进行信息收集及发布考核信息</h4>
+			<form action="" id="forms">
+				<label for="id">学号：</label>
+				<p>
+					<input type="text" name="id" id="id"/>
+				</p>
+				<label for="name">姓名：</label>
+				<p>
+					<input type="text" name="name" id="name" />
+				</p>
+				<label for="class">班级：</label>
+				<p>
+					<input type="text" name="class" id="class">
+				</p>
+				<label for="QQ">QQ：</label>
+				<p>
+					<input type="text" name="QQ" id="QQ">
+				</p>
+				<label for="sex">性别：</label>
+				<p>
+					<input type="radio" name="sex">男
+					<input type="radio" name="sex">女
+				</p>
+				<label for="own">个人简介：</label>
+				<p>
+					<textarea name="own" id="own" cols="79" rows="5"></textarea>
+				</p>
+				<label for="future">未来学习设想：</label>
+				<p>
+					<textarea name="future" id="future" cols="79" rows="5"></textarea>
+				</p>
+				<a href="introduce.html" class="back">返回</a>
+				<input type="submit" value="提交" />
+			</form>
+		</div>
+	</div>
+	<div class="copy">Copyright&copy;Parabola.</div>
+	<script>
+		$(function(){
+			validate();
+		});
+	</script>
+</body>
+</html>

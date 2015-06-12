@@ -1,0 +1,65 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot?wkmwtl');
+	src:url('../fonts/icomoon.eot?#iefixwkmwtl') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?wkmwtl') format('woff'),
+		url('../fonts/icomoon.ttf?wkmwtl') format('truetype'),
+		url('../fonts/icomoon.svg?wkmwtl#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cloud:before {
+	content: "\e04b";
+}
+
+.icon-soccer:before {
+	content: "\e600";
+}
+
+.icon-fire:before {
+	content: "\e602";
+}
+
+.icon-group:before {
+	content: "\f0c0";
+}
+
+.icon-cubes:before {
+	content: "\f1b3";
+}
+
+.icon-chevron-up:before {
+	content: "\e603";
+}
+
+.icon-stats:before {
+	content: "\e601";
+}
+
+.icon-apple:before {
+	content: "\eabf";
+}
+
+.icon-android:before {
+	content: "\eac1";
+}
+
+.icon-windows:before {
+	content: "\eac2";
+}
+

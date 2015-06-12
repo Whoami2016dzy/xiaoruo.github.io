@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?czajeh');
-	src:url('../fonts/icomoon.eot?#iefixczajeh') format('embedded-opentype'),
-		url('../fonts/icomoon.woff?czajeh') format('woff'),
-		url('../fonts/icomoon.ttf?czajeh') format('truetype'),
-		url('../fonts/icomoon.svg?czajeh#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot?9uer9f');
+	src:url('../fonts/icomoon.eot?#iefix9uer9f') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?9uer9f') format('truetype'),
+		url('../fonts/icomoon.woff?9uer9f') format('woff'),
+		url('../fonts/icomoon.svg?9uer9f#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,32 +23,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-pencil:before {
-	content: "\e905";
-	margin-right: 10px;
+.icon-mouse:before {
+	content: "\e11e";
 }
-
-.icon-file-empty:before {
-	content: "\e924";
-	margin-right: 10px;
-}
-
-.icon-folder-open:before {
-	content: "\e930";
-	margin-right: 10px;
-}
-
-.icon-plus:before {
-	content: "\ea0a";
-	margin-right: 10px;
-}
-
-.icon-cross:before {
-	content: "\ea0f";
-	margin-right: 10px;
-}
-
-.icon-checkmark:before {
-	content: "\ea10";
-}
-
